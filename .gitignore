@@ -1,0 +1,12 @@
+# Ignore everything in root.
+/*
+
+# Except these config folders and files.
+!/.gitignore
+!/README.md
+!/docker
+
+# Allow user to customise docker-compose.yml
+/docker/docker-compose.yml
+
+
