@@ -5,6 +5,11 @@
 !/.gitignore
 !/README.md
 !/docker
+!/data
+
+# Ignore Drupal code and MySQL data folders.
+/data/drupal
+/data/mysql
 
 # Allow user to customise docker-compose.yml
 /docker/docker-compose.yml
