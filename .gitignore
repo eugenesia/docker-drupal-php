@@ -11,7 +11,8 @@
 /data/drupal
 /data/mysql
 
-# Allow user to customise docker-compose.yml
+# Allow user to customise docker-compose.yml and PHP config.
 /docker/docker-compose.yml
+/docker/php.ini
 
 

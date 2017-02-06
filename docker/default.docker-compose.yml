@@ -23,6 +23,8 @@ services:
     build: .
     volumes:
       - "../data/drupal:/var/www/html"
+      # Allow overriding php.ini with custom php.ini
+      # - "./php.ini:/usr/local/etc/php/php.ini"
     # Expose container Apache port.
     ports:
       - "[8080]:80"
