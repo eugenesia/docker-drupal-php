@@ -1,7 +1,7 @@
 # Configure Drupal 7 image for ClientHub.
 # from https://www.drupal.org/requirements/php#drupalversions
 # Based on Dockerfile for drupal:7-apache https://github.com/docker-library/drupal/blob/master/7/apache/Dockerfile
-FROM php:5.6-apache
+FROM eugenesia/php:5.4-apache
 
 MAINTAINER Eugene Sia <eugene@eugenesia.co.uk>
 LABEL description="PHP5/Apache environment suitable for running a Drupal 7 site."
