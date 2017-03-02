@@ -16,7 +16,12 @@ RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libpq-dev \
 
 # Install other PHP extensions we need.
 # See https://github.com/docker-library/docs/blob/master/php/README.md#how-to-install-more-php-extensions
-RUN docker-php-ext-install opcache
+
+# Opcache must be installed using Pecl for PHP <= 5.4
+# See http://php.net/manual/en/opcache.installation.php#opcache.installation.pecl
+# RUN docker-php-ext-install opcache
+RUN pecl install zendopcache \
+  && docker-php-ext-enable opcache
 
 # Install XHProf PECL extension for perf profiling.
 RUN pecl install xhprof-beta \
