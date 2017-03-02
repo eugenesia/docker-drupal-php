@@ -37,7 +37,7 @@ RUN pecl install xhprof-beta \
 # COPY 000-default.conf /etc/apache2/sites-available/
 
 # Configure PHP.
-COPY ../php.ini /usr/local/etc/php/
+COPY php.ini /usr/local/etc/php/
 
 # WWW files.
 VOLUME ["/var/www/html"]
