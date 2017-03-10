@@ -19,7 +19,7 @@ services:
   [mydrupal]:
     container_name: [mydrupal]
     # Eugene's custom PHP5 image for Drupal 7.
-    image: eugenesia/drupal:php5-apache
+    image: eugenesia/drupal-php:5.6-apache
     volumes:
       - "../data/drupal:/var/www/html"
       # Allow overriding php.ini with custom php.ini
