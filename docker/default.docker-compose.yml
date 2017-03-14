@@ -30,19 +30,20 @@ services:
     depends_on:
       - mysql
 
-# # Alternative web server config using PHPFarm for PHP 5.2 and PHP 5.3.
-# # See https://github.com/splitbrain/docker-phpfarm
-# web:
-#   container_name: [myproj]_web
-#   # PHPFarm Docker image using FastCGI for PHP 5.2.17
-#   # image: splitbrain/phpfarm
-#   volumes:
-#     - "../data/drupal:/var/www"
-#     # Allow overriding php.ini with custom php.ini
-#     # - "./php.ini:/var/www/.php/php.ini"
-#   # Expose container Apache port.
-#   # 8052: PHP 5.2, 8053: PHP 5.3, 8054: PHP 5.4, 8070: PHP 7.0, etc.
-#   ports:
-#     - "[8052]:8052"
-#   depends_on:
-#     - mysql
+#   # Alternative web server config using PHPFarm and FastCGI for PHP 5.2 and
+#   # PHP 5.3.
+#   # See https://github.com/splitbrain/docker-phpfarm
+#   web:
+#     container_name: [myproj]_web
+#     image: splitbrain/phpfarm:wheezy
+#     volumes:
+#       - "../data/drupal:/var/www"
+#       # Allow overriding php.ini with custom php.ini
+#       # - "./php.ini:/var/www/.php/php.ini"
+#     # Expose container Apache port.
+#     # 8052: PHP 5.2, 8053: PHP 5.3, 8054: PHP 5.4, 8070: PHP 7.0, etc.
+#     ports:
+#       - "[8152]:8052"
+#     depends_on:
+#       - mysql
+
