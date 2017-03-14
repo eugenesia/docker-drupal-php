@@ -1,11 +1,11 @@
 # Template docker-compose.yml file - copy to docker-compose.yml and modify.
 # Change the service names, container names, and exposed ports.
 # Things to change: Everything in square brackets e.g. [mymysql], [8080]
-version: '2'
+version: '3'
 
 services:
-  [mymysql]:
-    container_name: [mymysql]
+  mysql:
+    container_name: [myproj]_mysql
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -16,10 +16,10 @@ services:
     volumes:
       - "../data/mysql:/var/lib/mysql"
 
-  [mydrupal]:
-    container_name: [mydrupal]
+  web:
+    container_name: [myproj]_web
     # Eugene's custom PHP5 image for Drupal 7.
-    image: eugenesia/drupal-php:5.6-apache
+    # image: eugenesia/drupal-php:5.6-apache
     volumes:
       - "../data/drupal:/var/www/html"
       # Allow overriding php.ini with custom php.ini
@@ -28,5 +28,21 @@ services:
     ports:
       - "[8080]:80"
     depends_on:
-      - [mymysql]
+      - mysql
 
+# # Alternative web server config using PHPFarm for PHP 5.2 and PHP 5.3.
+# # See https://github.com/splitbrain/docker-phpfarm
+# web:
+#   container_name: [myproj]_web
+#   # PHPFarm Docker image using FastCGI for PHP 5.2.17
+#   # image: splitbrain/phpfarm
+#   volumes:
+#     - "../data/drupal:/var/www"
+#     # Allow overriding php.ini with custom php.ini
+#     # - "./php.ini:/var/www/.php/php.ini"
+#   # Expose container Apache port.
+#   # 8052: PHP 5.2, 8053: PHP 5.3, 8054: PHP 5.4, 8070: PHP 7.0, etc.
+#   ports:
+#     - "[8052]:8052"
+#   depends_on:
+#     - mysql
