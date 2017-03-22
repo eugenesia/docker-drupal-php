@@ -13,6 +13,7 @@
 
 # Allow user to customise docker-compose.yml and PHP config.
 /docker/docker-compose.yml
-/docker/php.ini
+/docker/.env
+/docker/config/php.ini
 
 

@@ -5,8 +5,7 @@ version: '3'
 
 services:
   mysql:
-    container_name: [myproj]_mysql
-    image: mysql:latest
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: drupal
@@ -16,40 +15,41 @@ services:
     volumes:
       - "../data/mysql:/var/lib/mysql"
       # Configure MySQL for Drupal.
-      - "./mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf"
+      - "./config/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf"
 
 
   # Web server config using PHPFarm and FastCGI for PHP 5.2 and
   # PHP 5.3.
   # See https://github.com/splitbrain/docker-phpfarm
   web:
-    container_name: [myproj]_web
     # Use splitbrain/phpfarm:wheezy if need to use PHP 5.2.
     image: splitbrain/phpfarm:jessie
     volumes:
       - "../data/drupal:/var/www"
       # Additional config for Apache Fcgid mod.
-      - "./phpfarm.conf:/etc/apache2/conf.d/phpfarm.conf"
+      - "./config/phpfarm.conf:/etc/apache2/conf.d/phpfarm.conf"
       # Allow overriding php.ini with custom php.ini
-      # - "./php.ini:/var/www/.php/php.ini"
-    # Expose container Apache port.
+      # - "./config/php.ini:/var/www/.php/php.ini"
+    # Expose container Apache port according to PHP version to use.
     # 8052: PHP 5.2, 8053: PHP 5.3, 8054: PHP 5.4, 8070: PHP 7.0, etc.
+    # See https://github.com/splitbrain/docker-phpfarm
     ports:
-      - "[8152]:8056"
+      - "[8156]:8056"
     depends_on:
       - mysql
 
 
 #   # Alternative setup using Apache and mod_php
 #   web:
-#     container_name: [myproj]_web
 #     # Eugene's custom PHP5 image for Drupal 7.
 #     # image: eugenesia/drupal-php:5.6-apache
 #     volumes:
 #       - "../data/drupal:/var/www/html"
 #       # Allow overriding php.ini with custom php.ini
-#       # - "./php.ini:/usr/local/etc/php/php.ini"
-#     # Expose container Apache port.
+#       # - "./config/php.ini:/usr/local/etc/php/php.ini"
+#     # Expose container Apache port according to PHP version to use.
+#     # 8052: PHP 5.2, 8053: PHP 5.3, 8054: PHP 5.4, 8070: PHP 7.0, etc.
+#     # See https://github.com/splitbrain/docker-phpfarm
 #     ports:
 #       - "[8080]:80"
 #     depends_on:
