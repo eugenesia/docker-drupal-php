@@ -11,3 +11,5 @@ Folder structure:
   /[any]/ : Create any other folders to store other stuff e.g. db backups
 ```
 
+See _docker/README.md_ for more configuration instructions.
+
