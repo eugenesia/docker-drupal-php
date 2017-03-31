@@ -1,9 +1,13 @@
 # Template docker-compose.yml file - copy to docker-compose.yml and modify.
 # Change the service names, container names, and exposed ports.
-# Things to change: Everything in square brackets e.g. [mymysql], [8080]
+# Things to change:
+# - Ports: Change default web and MySQL ports to those not taken by other
+#   services on your system.
+
 version: '3'
 
 services:
+
   mysql:
     image: mysql:5.7
     environment:
@@ -11,7 +15,7 @@ services:
       MYSQL_DATABASE: drupal
     ports:
       # Expose container MySQL port.
-      - "[3307]:3306"
+      - "3307:3306"
     volumes:
       - "../data/mysql:/var/lib/mysql"
       # Configure MySQL for Drupal.
@@ -20,10 +24,10 @@ services:
 
   # Web server config using PHPFarm and FastCGI for PHP 5.2 and
   # PHP 5.3.
-  # See https://github.com/splitbrain/docker-phpfarm
+  # See https://github.com/eugenesia/docker-phpfarm
   web:
-    # Use splitbrain/phpfarm:wheezy if need to use PHP 5.2.
-    image: splitbrain/phpfarm:jessie
+    # Use wheezy if need to use PHP 5.2.
+    image: eugenesia/phpfarm:jessie
     volumes:
       - "../data/drupal:/var/www"
       # Additional config for Apache Fcgid mod.
@@ -32,9 +36,9 @@ services:
       # - "./config/php.ini:/var/www/.php/php.ini"
     # Expose container Apache port according to PHP version to use.
     # 8052: PHP 5.2, 8053: PHP 5.3, 8054: PHP 5.4, 8070: PHP 7.0, etc.
-    # See https://github.com/splitbrain/docker-phpfarm
+    # See https://github.com/eugenesia/docker-phpfarm
     ports:
-      - "[8156]:8056"
+      - "8156:8056"
     depends_on:
       - mysql
 
@@ -47,9 +51,6 @@ services:
 #       - "../data/drupal:/var/www/html"
 #       # Allow overriding php.ini with custom php.ini
 #       # - "./config/php.ini:/usr/local/etc/php/php.ini"
-#     # Expose container Apache port according to PHP version to use.
-#     # 8052: PHP 5.2, 8053: PHP 5.3, 8054: PHP 5.4, 8070: PHP 7.0, etc.
-#     # See https://github.com/splitbrain/docker-phpfarm
 #     ports:
 #       - "[8080]:80"
 #     depends_on:
