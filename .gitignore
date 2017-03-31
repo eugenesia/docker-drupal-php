@@ -14,6 +14,12 @@
 # Allow user to customise docker-compose.yml and PHP config.
 /docker/docker-compose.yml
 /docker/.env
-/docker/config/php.ini
 
+# User can put own server configs in /docker/config/ ignored by Git.
+/docker/config
+
+# Ignore default configs and config templates.
+!/docker/config/default.php.ini
+!/docker/config/mysqld.cnf
+!/docker/config/phpfarm.conf
 
