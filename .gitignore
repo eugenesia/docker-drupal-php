@@ -19,6 +19,7 @@
 /docker/config
 
 # Ignore default configs and config templates.
+!/docker/config/README.md
 !/docker/config/default.php.ini
 !/docker/config/mysqld.cnf
 !/docker/config/phpfarm.conf
