@@ -1,6 +1,11 @@
 # Ignore everything in root.
 /*
 
+# Temp files.
+.DS_Store
+*~
+*.swp
+
 # Except these config folders and files.
 !/.gitignore
 !/README.md
