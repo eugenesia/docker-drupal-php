@@ -22,8 +22,7 @@ services:
       - "./config/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf"
 
 
-  # Web server config using PHPFarm and FastCGI for PHP 5.2 and
-  # PHP 5.3.
+  # Web server config using PHPFarm and FastCGI for multiple PHP versions.
   # See https://github.com/eugenesia/docker-phpfarm
   web:
     # Use wheezy if need to use PHP 5.2.
@@ -41,18 +40,4 @@ services:
       - "8156:8056"
     depends_on:
       - mysql
-
-
-#   # Alternative setup using Apache and mod_php
-#   web:
-#     # Eugene's custom PHP5 image for Drupal 7.
-#     # image: eugenesia/drupal-php:5.6-apache
-#     volumes:
-#       - "../data/drupal:/var/www/html"
-#       # Allow overriding php.ini with custom php.ini
-#       # - "./config/php.ini:/usr/local/etc/php/php.ini"
-#     ports:
-#       - "[8080]:80"
-#     depends_on:
-#       - mysql
 
